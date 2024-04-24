@@ -52,7 +52,7 @@ float dijkstra(
         noeud_id_t* voisins = malloc(nvoisins*sizeof(noeud_id_t));
         noeuds_voisins(graphe, nc, voisins);
 
-        for (int i = 0; i < nvoisins; i++)
+        for (size_t i = 0; i < nvoisins; i++)
         {
             noeud_id_t nv = voisins[i];
             float nouvelle_distance = noeud_distance(graphe, nc, nv) + distance_nc;
