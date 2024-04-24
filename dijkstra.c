@@ -24,7 +24,7 @@ void construire_chemin_vers(liste_noeud_t** chemin, liste_noeud_t* visites, noeu
     if (np != NO_ID)
     {
         construire_chemin_vers(chemin, visites, np);
-        inserer_noeud_liste(chemin, np, precedent_noeud_liste(visites, np), distance_noeud_liste(visites, np));
+        inserer_noeud_liste(*chemin, np, precedent_noeud_liste(visites, np), distance_noeud_liste(visites, np));
     } 
     
 }
@@ -62,6 +62,8 @@ float dijkstra(
                 changer_noeud_liste(AVisiter, nv, nc, nouvelle_distance);
             }
         }
+
+        free(voisins);
     }
     if (chemin)
     {
