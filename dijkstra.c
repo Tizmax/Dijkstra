@@ -19,7 +19,15 @@
  * @param visites [in] liste des noeuds visités créée par l'algorithme de Dijkstra
  * @param noeud noeud vers lequel on veut construire le chemin depuis le départ
  */
-// TODO: construire_chemin_vers
+void construire_chemin_vers(liste_noeud_t** chemin, liste_noeud_t* visites, noeud_id_t noeud) {
+    noeud_id_t np = precedent_noeud_liste(visites, noeud);
+    if (np != NO_ID)
+    {
+        construire_chemin_vers(chemin, visites, np);
+        inserer_noeud_liste(chemin, np, precedent_noeud_liste(visites, np), distance_noeud_liste(visites, np));
+    } 
+    
+}
 
 
 float dijkstra(
@@ -55,7 +63,10 @@ float dijkstra(
             }
         }
     }
+    if (chemin)
+    {
+        liste_noeud_t* liste_chemin = (liste_noeud_t*) malloc(sizeof(liste_noeud_t*));
+        chemin = &liste_chemin;
+        construire_chemin_vers(chemin, Visites, destination);
+    }
 }
-
-
-
