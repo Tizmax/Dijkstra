@@ -3,6 +3,10 @@
 #include <stdlib.h>
 #include <math.h>
 
+struct liste_noeud_t{
+    _cellule* debut;
+};
+
 liste_noeud_t* creer_liste(){
     liste_noeud_t* liste = (liste_noeud_t*) malloc(sizeof(_cellule));
     liste->debut = NULL;
