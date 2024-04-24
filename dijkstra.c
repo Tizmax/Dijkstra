@@ -67,7 +67,7 @@ float dijkstra(
     }
     if (chemin)
     {
-        liste_noeud_t* liste_chemin = (liste_noeud_t*) malloc(sizeof(liste_noeud_t*));
+        liste_noeud_t* liste_chemin = creer_liste();
         chemin = &liste_chemin;
         construire_chemin_vers(chemin, Visites, destination);
     }
