@@ -39,8 +39,8 @@ float dijkstra(
     liste_noeud_t* Visites = creer_liste();
 
     inserer_noeud_liste(AVisiter, source, NO_ID, 0);
-
-    while (est_vide_liste(AVisiter))
+ 
+    while (!est_vide_liste(AVisiter))
     {
         noeud_id_t nc = min_noeud_liste(AVisiter);
         noeud_id_t precedent_nc = precedent_noeud_liste(AVisiter, nc);
@@ -48,18 +48,22 @@ float dijkstra(
         inserer_noeud_liste(Visites, nc, precedent_nc, distance_nc);
         supprimer_noeud_liste(AVisiter, nc);
         
+        
         size_t nvoisins = nombre_voisins(graphe, nc);
         noeud_id_t* voisins = malloc(nvoisins*sizeof(noeud_id_t));
         noeuds_voisins(graphe, nc, voisins);
-
+        printf("%d\n",(int)nvoisins);
         for (size_t i = 0; i < nvoisins; i++)
         {
             noeud_id_t nv = voisins[i];
-            float nouvelle_distance = noeud_distance(graphe, nc, nv) + distance_nc;
-            float ancienne_distance = distance_noeud_liste(AVisiter, nv);
-            if (nouvelle_distance < ancienne_distance)
+            if (!contient_noeud_liste(Visites, nv))
             {
-                changer_noeud_liste(AVisiter, nv, nc, nouvelle_distance);
+                float nouvelle_distance = noeud_distance(graphe, nc, nv) + distance_nc;
+                float ancienne_distance = distance_noeud_liste(AVisiter, nv);
+                if (nouvelle_distance < ancienne_distance)
+                {
+                    changer_noeud_liste(AVisiter, nv, nc, nouvelle_distance);
+                }
             }
         }
 

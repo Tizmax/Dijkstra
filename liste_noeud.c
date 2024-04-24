@@ -23,6 +23,7 @@ void detruire_liste(liste_noeud_t** liste_ptr){
         free(a_detruire);
     }
     liste->debut = NULL;
+    *liste_ptr = NULL;
 }
 
 bool est_vide_liste(const liste_noeud_t* liste){
