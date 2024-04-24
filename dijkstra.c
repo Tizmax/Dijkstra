@@ -71,4 +71,7 @@ float dijkstra(
         chemin = &liste_chemin;
         construire_chemin_vers(chemin, Visites, destination);
     }
+    detruire_liste(&Visites);
+    detruire_liste(&AVisiter);
+    return distance_noeud_liste(*chemin, destination);
 }

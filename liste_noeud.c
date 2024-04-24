@@ -13,16 +13,16 @@ liste_noeud_t* creer_liste(){
     return liste;
 }
 
-void detruire_liste(liste_noeud_t* liste_ptr){
-
-    _cellule* curseur = liste_ptr->debut;
+void detruire_liste(liste_noeud_t** liste_ptr){
+    liste_noeud_t* liste = *liste_ptr;
+    _cellule* curseur = liste->debut;
     _cellule* a_detruire;
     while (curseur != NULL){
         a_detruire = curseur;
         curseur = curseur->suivante;
         free(a_detruire);
     }
-    liste_ptr->debut = NULL;
+    liste->debut = NULL;
 }
 
 bool est_vide_liste(const liste_noeud_t* liste){

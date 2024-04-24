@@ -1,3 +1,5 @@
+#ifndef LISTE_NOEUD
+#define LISTE_NOEUD
 #include "graphe.h"
 #include <stdbool.h>
 
@@ -30,7 +32,7 @@ liste_noeud_t* creer_liste();
  *
  * @param liste_ptr pointeur sur la liste à détruire
  */
-void detruire_liste(const liste_noeud_t* liste_ptr);
+void detruire_liste(liste_noeud_t** liste_ptr);
 
 /**
  * est_vide_liste : test si la liste passée en paramètre est vide
@@ -148,3 +150,5 @@ void changer_noeud_liste(liste_noeud_t* liste, noeud_id_t noeud,
  * @param noeud noeud à supprimer de liste
  */
 void supprimer_noeud_liste(liste_noeud_t* liste, noeud_id_t noeud);
+
+#endif

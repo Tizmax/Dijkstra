@@ -6,17 +6,115 @@ Vérification de la syntaxe pour dijkstra.h :
 gcc -std=c99 -c -Wall -Wextra -pedantic -Werror -fsyntax-only -x c dijkstra.h
 Vérification de la syntaxe pour dijkstra.c :
 gcc -std=c99 -c -Wall -Wextra -pedantic -Werror -fsyntax-only -x c dijkstra.c
-dijkstra.c: In function 'dijkstra':
-dijkstra.c:25:28: error: unused parameter 'graphe' [-Werror=unused-parameter]
-   25 |     const struct graphe_t* graphe,
-      |     ~~~~~~~~~~~~~~~~~~~~~~~^~~~~~
-dijkstra.c:26:16: error: unused parameter 'source' [-Werror=unused-parameter]
-   26 |     noeud_id_t source, noeud_id_t destination,
-      |     ~~~~~~~~~~~^~~~~~
-dijkstra.c:26:35: error: unused parameter 'destination' [-Werror=unused-parameter]
-   26 |     noeud_id_t source, noeud_id_t destination,
-      |                        ~~~~~~~~~~~^~~~~~~~~~~
-dijkstra.c:27:21: error: unused parameter 'chemin' [-Werror=unused-parameter]
-   27 |     liste_noeud_t** chemin) {
-      |     ~~~~~~~~~~~~~~~~^~~~~~
+
+[le header liste_noeud.h est correctement gardé]
+==code
+
+==endcode
+
+[Définition de liste_noeud_t]
+==code
+liste_noeud_t* t; (void) t;
+==endcode
+
+[liste_noeud_t abstrait]
+==code
+liste_noeud_t t; (void) t;
+==endcode
+<stdin>: In function 'test':
+<stdin>:4:15: error: storage size of 't' isn't known
+<stdin>:4:15: error: unused variable 't' [-Werror=unused-variable]
+cc1: all warnings being treated as errors
+
+[creer_liste correcte]
+==code
+liste_noeud_t* t = creer_liste(); (void) t;
+==endcode
+
+[detruire_liste correcte]
+==code
+liste_noeud_t* t = creer_liste(); detruire_liste(&t);
+==endcode
+
+[est_vide_liste correcte]
+==code
+liste_noeud_t* t = creer_liste(); bool a = est_vide_liste(t); (void) a;
+==endcode
+
+[contient_noeud_liste correcte]
+==code
+liste_noeud_t* t = creer_liste(); bool a = contient_noeud_liste(t, (noeud_id_t) 0); (void) a;
+==endcode
+
+[contient_arrete_liste correcte]
+==code
+liste_noeud_t* t = creer_liste(); bool a = contient_arrete_liste(t, (noeud_id_t) 0, (noeud_id_t) 0); (void) a;
+==endcode
+
+[distance_noeud_liste correcte]
+==code
+liste_noeud_t* t = creer_liste(); float f = distance_noeud_liste(t, (noeud_id_t)0); (void) f;
+==endcode
+
+[precedent_noeud_liste correcte]
+==code
+liste_noeud_t* t = creer_liste(); noeud_id_t n = precedent_noeud_liste(t, (noeud_id_t) 0); (void) n;
+==endcode
+
+[min_noeud_liste correcte]
+==code
+liste_noeud_t* t = creer_liste(); noeud_id_t n = min_noeud_liste(t); (void) n;
+==endcode
+
+[inserer_noeud_liste correcte]
+==code
+liste_noeud_t* t = creer_liste(); inserer_noeud_liste(t, (noeud_id_t) 0, (noeud_id_t) 0, (float) 0.f);
+==endcode
+
+[changer_noeud_liste correcte]
+==code
+liste_noeud_t* t = creer_liste(); changer_noeud_liste(t, (noeud_id_t) 0, (noeud_id_t) 0, (float) 0.f);
+==endcode
+
+[supprimer_noeud_liste correcte]
+==code
+liste_noeud_t* t = creer_liste(); supprimer_noeud_liste(t, (noeud_id_t) 0);
+==endcode
+
+[est_vide_lsite const-correcte]
+==code
+const liste_noeud_t* t = creer_liste(); est_vide_liste(t);
+==endcode
+
+[contient_noeud_liste const-correcte]
+==code
+const liste_noeud_t* t = creer_liste(); contient_noeud_liste(t, (noeud_id_t) 0);
+==endcode
+
+[contient_arrete_liste const-correcte]
+==code
+const liste_noeud_t* t = creer_liste(); contient_arrete_liste(t, (noeud_id_t) 0, (noeud_id_t) 0);
+==endcode
+
+[distance_noeud_liste const-correcte]
+==code
+const liste_noeud_t* t = creer_liste(); distance_noeud_liste(t, (noeud_id_t)0);
+==endcode
+
+[precedent_noeud_liste const-correcte]
+==code
+const liste_noeud_t* t = creer_liste(); precedent_noeud_liste(t, (noeud_id_t) 0);
+==endcode
+
+[min_noeud_liste const-correcte]
+==code
+const liste_noeud_t* t = creer_liste(); min_noeud_liste(t);
+==endcode
+
+[construire_chemin statique]
+==code
+construire_chemin_vers(NULL, NULL, 0);
+==endcode
+<stdin>: In function 'test':
+<stdin>:4:1: error: implicit declaration of function 'construire_chemin_vers' [-Werror=implicit-function-declaration]
 cc1: all warnings being treated as errors
