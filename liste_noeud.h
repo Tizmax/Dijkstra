@@ -10,11 +10,13 @@ struct _cellule{
     noeud_id_t precedent;
     _cellule* suivante;
 };
+struct liste_noeud_t;
+
+typedef struct liste_noeud_t liste_noeud_t;
 
 struct liste_noeud_t{
     _cellule* debut;
 };
-typedef struct liste_noeud_t liste_noeud_t;
 /**
  * creer_liste : crée une liste de noeuds, initialement vide
  *
