@@ -38,7 +38,7 @@ float dijkstra(
     liste_noeud_t* AVisiter = creer_liste();
     liste_noeud_t* Visites = creer_liste();
 
-    inserer_noeud_liste(AVisiter, source, NO_ID, INFINITY);
+    inserer_noeud_liste(AVisiter, source, NO_ID, 0);
 
     while (est_vide_liste(AVisiter))
     {
