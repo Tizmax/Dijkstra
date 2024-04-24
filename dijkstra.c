@@ -67,8 +67,7 @@ float dijkstra(
     }
     if (chemin)
     {
-        liste_noeud_t* liste_chemin = creer_liste();
-        chemin = &liste_chemin;
+        *chemin = creer_liste();
         construire_chemin_vers(chemin, Visites, destination);
     }
     detruire_liste(&Visites);
