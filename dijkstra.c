@@ -24,8 +24,8 @@ void construire_chemin_vers(liste_noeud_t** chemin, liste_noeud_t* visites, noeu
     if (np != NO_ID)
     {
         construire_chemin_vers(chemin, visites, np);
-        inserer_noeud_liste(*chemin, np, precedent_noeud_liste(visites, np), distance_noeud_liste(visites, np));
-    } 
+    }
+    inserer_noeud_liste(*chemin, noeud, np, distance_noeud_liste(visites, noeud));
     
 }
 
@@ -38,7 +38,7 @@ float dijkstra(
     liste_noeud_t* AVisiter = creer_liste();
     liste_noeud_t* Visites = creer_liste();
 
-    inserer_noeud_liste(AVisiter, source, NO_ID, 0);
+    inserer_noeud_liste(AVisiter, source, NO_ID, 0.0);
  
     while (!est_vide_liste(AVisiter))
     {
@@ -49,16 +49,15 @@ float dijkstra(
         supprimer_noeud_liste(AVisiter, nc);
         
         
-        size_t nvoisins = nombre_voisins(graphe, nc);
+        int nvoisins = nombre_voisins(graphe, nc);
         noeud_id_t* voisins = malloc(nvoisins*sizeof(noeud_id_t));
         noeuds_voisins(graphe, nc, voisins);
-        printf("%d\n",(int)nvoisins);
-        for (size_t i = 0; i < nvoisins; i++)
+        for (int i = 0; i < nvoisins; i++)
         {
             noeud_id_t nv = voisins[i];
             if (!contient_noeud_liste(Visites, nv))
             {
-                float nouvelle_distance = noeud_distance(graphe, nc, nv) + distance_nc;
+                float nouvelle_distance = noeud_distance(graphe, nc, nv) + distance_noeud_liste(Visites, nc);
                 float ancienne_distance = distance_noeud_liste(AVisiter, nv);
                 if (nouvelle_distance < ancienne_distance)
                 {
@@ -76,5 +75,6 @@ float dijkstra(
     }
     detruire_liste(&Visites);
     detruire_liste(&AVisiter);
+
     return distance_noeud_liste(*chemin, destination);
 }

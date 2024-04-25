@@ -8,22 +8,24 @@ struct liste_noeud_t{
 };
 
 liste_noeud_t* creer_liste(){
-    liste_noeud_t* liste = (liste_noeud_t*) malloc(sizeof(_cellule));
+    liste_noeud_t* liste = (liste_noeud_t*) malloc(sizeof(liste_noeud_t));
     liste->debut = NULL;
     return liste;
 }
 
 void detruire_liste(liste_noeud_t** liste_ptr){
-    liste_noeud_t* liste = *liste_ptr;
-    _cellule* curseur = liste->debut;
-    _cellule* a_detruire;
-    while (curseur != NULL){
-        a_detruire = curseur;
-        curseur = curseur->suivante;
-        free(a_detruire);
+    if(liste_ptr != NULL){
+        liste_noeud_t* liste = *liste_ptr;
+        _cellule* curseur = liste->debut;
+        _cellule* a_detruire;
+        while (curseur != NULL){
+            a_detruire = curseur;
+            curseur = curseur->suivante;
+            free(a_detruire);
+        }
+        liste->debut = NULL;
+        *liste_ptr = NULL;
     }
-    liste->debut = NULL;
-    *liste_ptr = NULL;
 }
 
 bool est_vide_liste(const liste_noeud_t* liste){
@@ -103,20 +105,9 @@ void inserer_noeud_liste(liste_noeud_t* liste, noeud_id_t noeud, noeud_id_t prec
     nouveau_noeud->noeud = noeud;
     nouveau_noeud->distance = distance;
     nouveau_noeud->precedent = precedent;
-    nouveau_noeud->suivante = NULL;
+    nouveau_noeud->suivante = liste->debut;
 
-    _cellule* curseur = liste->debut;
-    if(curseur == NULL){
-        liste->debut = nouveau_noeud;
-    } else {
-        while (curseur->suivante != NULL)
-        {
-            curseur = curseur->suivante;
-        }
-        curseur->suivante = nouveau_noeud;
-    } 
-    
-    
+    liste->debut = nouveau_noeud;
 }
 
 void changer_noeud_liste(liste_noeud_t* liste, noeud_id_t noeud, noeud_id_t precedent, float distance){
