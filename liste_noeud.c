@@ -84,23 +84,24 @@ noeud_id_t precedent_noeud_liste(const liste_noeud_t* liste, noeud_id_t noeud){
     return NO_ID;
 }
 
-noeud_id_t min_noeud_liste(const liste_noeud_t* liste) {
-    if (liste == NULL || est_vide_liste(liste)) {
-        return NO_ID; // Return NO_ID if the list is NULL or empty
+noeud_id_t min_noeud_liste(const liste_noeud_t* liste){
+    if(liste == NULL) {
+        return NO_ID;
     }
 
     _cellule* curseur = liste->debut;
-    float distance_min = curseur->distance;
-    noeud_id_t noeud_min = curseur->noeud;
+    float distance_min = INFINITY;
+    float noeud_min = NO_ID;
 
-    while (curseur != NULL) {
-        if (curseur->distance < distance_min) {
+    while (curseur != NULL)
+    {
+        if (curseur->distance < distance_min)
+        {
             distance_min = curseur->distance;
             noeud_min = curseur->noeud;
         }
         curseur = curseur->suivante;
     }
-
     return noeud_min;
 }
 
