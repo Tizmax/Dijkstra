@@ -24,6 +24,7 @@ void detruire_liste(liste_noeud_t** liste_ptr){
             free(a_detruire);
         }
         liste->debut = NULL;
+        free(*liste_ptr);
         *liste_ptr = NULL;
     }
 }
